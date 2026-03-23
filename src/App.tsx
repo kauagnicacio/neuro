@@ -66,8 +66,8 @@ const FAQS = [
   { q: "Como funciona o NeuroControl?", a: "O NeuroControl é um dispositivo portátil que utiliza tecnologia de estimulação suave para ajudar o corpo a reduzir a tensão e entrar em estado de relaxamento. É fácil de usar: ligue, escolha a intensidade e posicione conforme indicado." },
   { q: "Quanto tempo leva para sentir os resultados?", a: "A maioria dos usuários relata perceber diferença logo nas primeiras sessões. Para melhores resultados, recomendamos o uso regular como parte da sua rotina diária." },
   { q: "Quanto tempo dura a bateria?", a: "Com uso padrão, a bateria dura de 6 a 8 horas por carga. O carregamento via USB-C leva aproximadamente 1 hora." },
-  { q: "Em quantos dias o pedido chega?", a: "Enviamos por SEDEX com rastreio. O prazo estimado é de 3 a 7 dias úteis para todo o Brasil." },
-  { q: "Tem garantia?", a: "Sim! O NeuroControl tem garantia de 90 dias. Se você não ficar satisfeito, entre em contato com nosso suporte e cuidamos de tudo." },
+  { q: "Em quantos dias o pedido chega?", a: "Enviamos com rastreio. O prazo estimado é de 7 a 10 dias úteis para todo o Brasil. O frete é grátis!" },
+  { q: "Tem garantia?", a: "Sim! O NeuroControl tem garantia de 30 dias. Se você não ficar satisfeito, entre em contato com nosso suporte e cuidamos de tudo." },
   { q: "Posso usar todos os dias?", a: "Sim, o NeuroControl foi desenvolvido para uso diário. Recomendamos sessões de 15 a 30 minutos conforme sua preferência." },
   { q: "Como faço para rastrear meu pedido?", a: "Assim que seu pedido for enviado, você recebe um e-mail com o código de rastreio. Você pode acompanhar a entrega diretamente no site dos Correios." },
 ];
@@ -206,16 +206,15 @@ export function App() {
           {/* Price + CTA */}
           <div className="flex flex-col items-center gap-4">
             <div className="text-center">
-              <p className="text-muted-foreground text-sm line-through">De R$ 249,90</p>
+              <p className="text-muted-foreground text-sm line-through">De R$ 179,90</p>
               <p className="text-4xl font-extrabold text-foreground">
-                R$ <span className="text-primary nc-text-glow">179,90</span>
+                por apenas R$ <span className="text-primary nc-text-glow">97,90</span>
               </p>
-              <p className="text-sm text-primary font-medium mt-0.5">5% OFF no Pix — R$ 170,91</p>
             </div>
 
             <button
               className="nc-glow-btn nc-pulse w-full max-w-xs bg-primary text-primary-foreground font-bold text-base py-4 px-8 rounded-2xl flex items-center justify-center gap-2"
-              onClick={() => alert("Integrar link de compra aqui")}
+              onClick={() => document.getElementById("comprar")?.scrollIntoView({ behavior: "smooth" })}
             >
               Quero o meu agora
               <ArrowRight size={18} />
@@ -225,7 +224,7 @@ export function App() {
             <div className="flex items-center gap-4 text-xs text-muted-foreground mt-1">
               <span className="flex items-center gap-1"><Lock size={12} /> Compra segura</span>
               <span className="flex items-center gap-1"><Truck size={12} /> Frete grátis</span>
-              <span className="flex items-center gap-1"><Shield size={12} /> Garantia 90 dias</span>
+              <span className="flex items-center gap-1"><Shield size={12} /> Garantia 30 dias</span>
             </div>
           </div>
         </div>
@@ -237,7 +236,7 @@ export function App() {
       <section className="px-4 py-6 nc-section-alt">
         <div className="max-w-sm mx-auto md:max-w-3xl flex flex-col md:flex-row items-center justify-center gap-6 md:gap-12 text-center">
           <div>
-            <p className="text-2xl font-extrabold text-foreground">+8.400</p>
+            <p className="text-2xl font-extrabold text-foreground">+2.400</p>
             <p className="text-xs text-muted-foreground">unidades vendidas</p>
           </div>
           <div className="hidden md:block w-px h-10 bg-border" />
@@ -247,12 +246,12 @@ export function App() {
           </div>
           <div className="hidden md:block w-px h-10 bg-border" />
           <div>
-            <p className="text-2xl font-extrabold text-foreground">3–7 dias</p>
+            <p className="text-2xl font-extrabold text-foreground">7–10 dias</p>
             <p className="text-xs text-muted-foreground">prazo de entrega</p>
           </div>
           <div className="hidden md:block w-px h-10 bg-border" />
           <div>
-            <p className="text-2xl font-extrabold text-foreground">90 dias</p>
+            <p className="text-2xl font-extrabold text-foreground">30 dias</p>
             <p className="text-xs text-muted-foreground">de garantia</p>
           </div>
         </div>
@@ -382,10 +381,10 @@ export function App() {
             Quem usa, aprova.
           </h2>
           <p className="text-center text-muted-foreground text-sm mb-10">
-            +1.200 avaliações · Nota média 4.9 de 5
+            +1.200 avaliações verificadas
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {REVIEWS.map((r, i) => (
               <div key={i} className="nc-card rounded-2xl p-5 flex flex-col gap-3">
                 <StarRating count={r.stars} />
@@ -409,34 +408,6 @@ export function App() {
                 </div>
               </div>
             ))}
-          </div>
-
-          {/* Rating summary */}
-          <div className="nc-card rounded-2xl p-5 flex flex-col md:flex-row items-center gap-6 justify-center">
-            <div className="text-center">
-              <p className="text-5xl font-extrabold text-primary nc-text-glow">4.9</p>
-              <StarRating count={5} />
-              <p className="text-xs text-muted-foreground mt-1">de 5 estrelas</p>
-            </div>
-            <div className="hidden md:block w-px h-16 bg-border" />
-            <div className="flex flex-col gap-2 w-full max-w-xs">
-              {[
-                { label: "5 estrelas", pct: 91 },
-                { label: "4 estrelas", pct: 7 },
-                { label: "3 estrelas", pct: 2 },
-              ].map((r, i) => (
-                <div key={i} className="flex items-center gap-2 text-xs">
-                  <span className="text-muted-foreground w-16 shrink-0">{r.label}</span>
-                  <div className="flex-1 h-1.5 rounded-full bg-secondary overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-primary"
-                      style={{ width: `${r.pct}%` }}
-                    />
-                  </div>
-                  <span className="text-muted-foreground w-8 text-right">{r.pct}%</span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
@@ -501,11 +472,11 @@ export function App() {
               <div className="nc-card rounded-xl p-4 flex flex-col gap-1.5">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Preço original</span>
-                  <span className="text-muted-foreground line-through">R$ 249,90</span>
+                  <span className="text-muted-foreground line-through">R$ 179,90</span>
                 </div>
                 <div className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">Desconto de lançamento</span>
-                  <span className="text-primary font-medium">–R$ 70,00</span>
+                  <span className="text-muted-foreground">Desconto especial</span>
+                  <span className="text-primary font-medium">–R$ 82,00</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Frete</span>
@@ -515,8 +486,7 @@ export function App() {
                 <div className="flex justify-between items-end">
                   <span className="font-semibold text-foreground">Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-extrabold text-foreground">R$ 179,90</p>
-                    <p className="text-xs text-primary">ou R$ 170,91 no Pix (5% OFF)</p>
+                    <p className="text-2xl font-extrabold text-foreground">R$ 97,90</p>
                   </div>
                 </div>
               </div>
@@ -528,8 +498,8 @@ export function App() {
                   "1x Cabo de carregamento USB-C",
                   "1x Manual de uso em português",
                   "Embalagem premium de presente",
-                  "Frete grátis para todo o Brasil",
-                  "Garantia de 90 dias",
+                  "Frete grátis — entrega em 7 a 10 dias úteis",
+                  "Garantia de 30 dias",
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-xs text-muted-foreground">
                     <Check size={13} className="text-primary shrink-0" />
@@ -543,7 +513,7 @@ export function App() {
                 className="nc-glow-btn w-full bg-primary text-primary-foreground font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2"
                 onClick={() => alert("Integrar link de compra aqui")}
               >
-                Comprar agora — R$ 179,90
+                Comprar agora — R$ 97,90
                 <ArrowRight size={18} />
               </button>
               <p className="text-center text-xs text-muted-foreground">
@@ -568,7 +538,7 @@ export function App() {
             {[
               { icon: Lock, title: "Pagamento 100% Seguro", desc: "Criptografia SSL e checkout protegido." },
               { icon: Truck, title: "Entrega Rastreada", desc: "Código de rastreio enviado por e-mail." },
-              { icon: Shield, title: "Garantia 90 Dias", desc: "Sem burocracia. Resolvemos para você." },
+              { icon: Shield, title: "Garantia 30 Dias", desc: "Sem burocracia. Resolvemos para você." },
               { icon: HeadphonesIcon, title: "Suporte Humanizado", desc: "Atendimento rápido e prestativo." },
             ].map((t, i) => (
               <div key={i} className="nc-card rounded-2xl p-4 flex flex-col items-center text-center gap-3">
@@ -619,48 +589,6 @@ export function App() {
       </section>
 
       <div className="nc-divider" />
-
-      {/* ───── FINAL CTA ───── */}
-      <section className="px-4 py-16 relative overflow-hidden">
-        <div
-          className="pointer-events-none absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(ellipse 70% 60% at 50% 50%, oklch(0.62 0.20 225 / 0.12) 0%, transparent 70%)",
-          }}
-        />
-        <div className="relative max-w-sm mx-auto md:max-w-xl text-center flex flex-col items-center gap-6">
-          <div
-            className="w-16 h-16 rounded-2xl flex items-center justify-center nc-glow-border"
-            style={{ background: "oklch(0.13 0.035 240)" }}
-          >
-            <Brain size={30} className="text-primary" />
-          </div>
-          <h2 className="text-2xl md:text-4xl font-extrabold leading-tight">
-            Sua rotina merece <br />
-            <span className="text-primary nc-text-glow">mais leveza.</span>
-          </h2>
-          <p className="text-muted-foreground text-sm max-w-xs leading-relaxed">
-            Junte-se a mais de 8.400 pessoas que já transformaram sua rotina com o NeuroControl.
-          </p>
-
-          <button
-            className="nc-glow-btn nc-pulse bg-primary text-primary-foreground font-bold text-base py-4 px-10 rounded-2xl flex items-center gap-2"
-            onClick={() => alert("Integrar link de compra aqui")}
-          >
-            <Package size={18} />
-            Garantir meu NeuroControl
-          </button>
-
-          <div className="flex items-center gap-4 text-xs text-muted-foreground">
-            <span className="flex items-center gap-1"><Lock size={11} /> Seguro</span>
-            <span>·</span>
-            <span className="flex items-center gap-1"><Truck size={11} /> Frete grátis</span>
-            <span>·</span>
-            <span className="flex items-center gap-1"><Shield size={11} /> Garantia 90 dias</span>
-          </div>
-        </div>
-      </section>
 
       {/* ───── FOOTER ───── */}
       <footer
