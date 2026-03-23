@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Zap,
   Shield,
@@ -14,23 +14,21 @@ import {
   RefreshCw,
   HeadphonesIcon,
   Lock,
-  Package,
   Brain,
   Activity,
   Moon,
   Sparkles,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
 // Product images per color
 const PRODUCT_IMAGES: Record<string, string> = {
-  azul: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/a3e6a320-e448-494b-8d1e-d0475b945e35.png",
-  branco: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/acb44ce2-1525-4cb5-941e-afd6e868c8c4.png",
-  preto: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/df217ed4-549b-4199-b930-5c526c40066e.png",
+  azul: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/0f1b5206-9311-4930-b734-1967a14168e7.png",
+  branco: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/d2003d0c-c063-444c-9559-df37abdd721e.png",
+  preto: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/8a2a852c-046b-4253-b8e6-8b6959f8c6ed.png",
 };
-
-const LIFESTYLE_IMAGE = "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/a340d429-628c-4524-8766-e0e87bc76b82.png";
-const PACKAGE_IMAGE = "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/8d99c95f-aad6-4dfb-b741-ce1c9b3c78dd.png";
 
 const COLOR_OPTIONS = [
   { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6" },
@@ -60,6 +58,12 @@ const REVIEWS = [
   { name: "Roberto L.", stars: 5, text: "Chegou rápido, embalagem impecável. Produto de qualidade que realmente entrega o que promete. Recomendo.", location: "Rio de Janeiro, RJ" },
   { name: "Fernanda K.", stars: 5, text: "Tenho muito estresse no dia a dia e esse dispositivo faz diferença. Uso na pausa do almoço e chego revigorada no segundo turno.", location: "Porto Alegre, RS" },
   { name: "Lucas T.", stars: 5, text: "Presente para minha mãe. Ela adorou, usa todo dia. Vale cada centavo, entrega muito mais do que eu esperava.", location: "Brasília, DF" },
+  { name: "Patrícia V.", stars: 5, text: "Nunca imaginei que algo tão pequeno pudesse fazer tanta diferença. Minhas dores de cabeça de tensão diminuíram muito.", location: "Fortaleza, CE" },
+  { name: "Diego M.", stars: 5, text: "Produto sensacional. Uso depois da academia para relaxar a musculatura. Recuperação muito mais rápida!", location: "Salvador, BA" },
+  { name: "Juliana C.", stars: 5, text: "Atendimento excelente e entrega super rápida. O produto é ainda melhor do que aparece nas fotos. Amei!", location: "Recife, PE" },
+  { name: "Ricardo F.", stars: 5, text: "Estava cético mas minha esposa me convenceu. Agora somos dois usando todo dia. Virou indispensável aqui em casa.", location: "Manaus, AM" },
+  { name: "Beatriz O.", stars: 5, text: "Perfeito para usar no trabalho nas horas mais tensas. Pequeno, discreto e muito eficiente. Super recomendo!", location: "Campinas, SP" },
+  { name: "André N.", stars: 5, text: "Melhor compra do ano. Resultado imediato logo na primeira sessão. Qualidade excepcional pelo preço.", location: "Florianópolis, SC" },
 ];
 
 const FAQS = [
@@ -71,6 +75,129 @@ const FAQS = [
   { q: "Posso usar todos os dias?", a: "Sim, o NeuroControl foi desenvolvido para uso diário. Recomendamos sessões de 15 a 30 minutos conforme sua preferência." },
   { q: "Como faço para rastrear meu pedido?", a: "Assim que seu pedido for enviado, você recebe um e-mail com o código de rastreio. Você pode acompanhar a entrega diretamente no site dos Correios." },
 ];
+
+function ReviewCarousel() {
+  const [current, setCurrent] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  const visibleCount = 2;
+  const total = REVIEWS.length;
+  const maxIndex = total - visibleCount;
+
+  const goTo = (idx: number) => {
+    if (isAnimating) return;
+    setIsAnimating(true);
+    setCurrent(Math.max(0, Math.min(idx, maxIndex)));
+    setTimeout(() => setIsAnimating(false), 350);
+  };
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => {
+        const next = prev + 1;
+        return next > maxIndex ? 0 : next;
+      });
+    }, 4000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [maxIndex]);
+
+  const resetTimer = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => {
+        const next = prev + 1;
+        return next > maxIndex ? 0 : next;
+      });
+    }, 4000);
+  };
+
+  const handlePrev = () => {
+    goTo(current === 0 ? maxIndex : current - 1);
+    resetTimer();
+  };
+
+  const handleNext = () => {
+    goTo(current >= maxIndex ? 0 : current + 1);
+    resetTimer();
+  };
+
+  const visibleReviews = REVIEWS.slice(current, current + visibleCount);
+
+  return (
+    <div className="relative">
+      {/* Cards */}
+      <div
+        className="grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-300"
+        style={{ opacity: isAnimating ? 0.6 : 1 }}
+      >
+        {visibleReviews.map((r, i) => (
+          <div key={`${current}-${i}`} className="nc-card rounded-2xl p-5 flex flex-col gap-3">
+            <StarRating count={r.stars} />
+            <p className="text-sm text-foreground leading-relaxed">"{r.text}"</p>
+            <div className="flex items-center gap-2 mt-auto">
+              <div
+                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
+                style={{ background: "oklch(0.62 0.20 225 / 0.2)", color: "oklch(0.62 0.20 225)" }}
+              >
+                {r.name[0]}
+              </div>
+              <div>
+                <p className="text-xs font-semibold text-foreground">{r.name}</p>
+                <p className="text-xs text-muted-foreground">{r.location}</p>
+              </div>
+              <div className="ml-auto">
+                <span className="text-[10px] text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full">
+                  Compra verificada
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Controls */}
+      <div className="flex items-center justify-center gap-4 mt-6">
+        <button
+          onClick={handlePrev}
+          className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
+          style={{ background: "oklch(0.62 0.20 225 / 0.15)", color: "oklch(0.62 0.20 225)" }}
+          aria-label="Anterior"
+        >
+          <ChevronLeft size={18} />
+        </button>
+
+        {/* Dots */}
+        <div className="flex gap-1.5">
+          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+            <button
+              key={i}
+              onClick={() => { goTo(i); resetTimer(); }}
+              className="rounded-full transition-all duration-300"
+              style={{
+                width: current === i ? "20px" : "8px",
+                height: "8px",
+                background: current === i ? "oklch(0.62 0.20 225)" : "oklch(0.62 0.20 225 / 0.3)",
+              }}
+              aria-label={`Ir para avaliação ${i + 1}`}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={handleNext}
+          className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
+          style={{ background: "oklch(0.62 0.20 225 / 0.15)", color: "oklch(0.62 0.20 225)" }}
+          aria-label="Próximo"
+        >
+          <ChevronRight size={18} />
+        </button>
+      </div>
+    </div>
+  );
+}
 
 interface FAQItemProps {
   q: string;
@@ -322,16 +449,6 @@ export function App() {
             ))}
           </div>
 
-          {/* Lifestyle image */}
-          <div className="flex justify-center">
-            <div className="rounded-2xl overflow-hidden nc-glow-border max-w-sm w-full">
-              <img
-                src={LIFESTYLE_IMAGE}
-                alt="NeuroControl em uso"
-                className="w-full object-cover"
-              />
-            </div>
-          </div>
         </div>
       </section>
 
@@ -384,31 +501,7 @@ export function App() {
             +1.200 avaliações verificadas
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {REVIEWS.map((r, i) => (
-              <div key={i} className="nc-card rounded-2xl p-5 flex flex-col gap-3">
-                <StarRating count={r.stars} />
-                <p className="text-sm text-foreground leading-relaxed">"{r.text}"</p>
-                <div className="flex items-center gap-2 mt-auto">
-                  <div
-                    className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold"
-                    style={{ background: "oklch(0.62 0.20 225 / 0.2)", color: "oklch(0.62 0.20 225)" }}
-                  >
-                    {r.name[0]}
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-foreground">{r.name}</p>
-                    <p className="text-xs text-muted-foreground">{r.location}</p>
-                  </div>
-                  <div className="ml-auto">
-                    <span className="text-[10px] text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full">
-                      Compra verificada
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+          <ReviewCarousel />
         </div>
       </section>
 
@@ -554,19 +647,6 @@ export function App() {
             ))}
           </div>
 
-          {/* Package image */}
-          <div className="flex justify-center">
-            <div className="rounded-2xl overflow-hidden nc-glow-border max-w-sm w-full">
-              <img
-                src={PACKAGE_IMAGE}
-                alt="Embalagem NeuroControl"
-                className="w-full object-cover"
-              />
-            </div>
-          </div>
-          <p className="text-center text-xs text-muted-foreground mt-4">
-            Embalagem premium — cuidado do unboxing até a sua mão.
-          </p>
         </div>
       </section>
 
