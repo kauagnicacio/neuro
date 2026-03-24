@@ -48,7 +48,7 @@ const BENEFITS = [
 
 const HOW_IT_WORKS = [
   { step: "01", title: "Ligue o NeuroControl", desc: "Pressione o botão de energia. O visor digital acende em 2 segundos.", icon: Zap },
-  { step: "02", title: "Escolha a intensidade", desc: "Use os botões + e – para encontrar o nível ideal para você. São 5 níveis diferentes.", icon: Activity },
+  { step: "02", title: "Escolha a intensidade", desc: "Use os botões + e – para encontrar o nível ideal para você. São 15 níveis diferentes.", icon: Activity },
   { step: "03", title: "Relaxe e sinta a diferença", desc: "Posicione conforme indicado e deixe a tecnologia trabalhar. Sinta a tensão diminuindo.", icon: Sparkles },
 ];
 
@@ -467,7 +467,7 @@ export function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
               { icon: Smartphone, title: "Design ultra compacto", desc: "Cabe na palma da mão. Discreto, elegante e moderno. Três cores exclusivas." },
-              { icon: Zap, title: "5 níveis de intensidade", desc: "Encontre o nível ideal para cada momento — do relaxamento suave ao profundo." },
+              { icon: Zap, title: "15 níveis de intensidade", desc: "Encontre o nível ideal para cada momento — do relaxamento suave ao profundo." },
               { icon: Battery, title: "Bateria que dura o dia", desc: "Carregamento USB-C de 1 hora e autonomia de até 8 horas de uso contínuo." },
               { icon: Award, title: "Qualidade premium", desc: "Materiais de alta qualidade, acabamento impecável e embalagem que impressiona." },
               { icon: RefreshCw, title: "Recarregável e sustentável", desc: "Sem pilhas descartáveis. Carregue na tomada, computador ou power bank." },
