@@ -21,6 +21,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  MessageCircle,
 } from "lucide-react";
 
 // Product images per color
@@ -31,9 +32,9 @@ const PRODUCT_IMAGES: Record<string, string> = {
 };
 
 const COLOR_OPTIONS = [
-  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6" },
-  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8" },
-  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569" },
+  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6", checkoutUrl: "https://pay.unicopag.com.br/u3ihbm2ro7" },
+  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8", checkoutUrl: "https://pay.unicopag.com.br/v8kiekruga" },
+  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569", checkoutUrl: "https://pay.unicopag.com.br/umrfrokshj" },
 ];
 
 const BENEFITS = [
@@ -241,6 +242,7 @@ export function App() {
 
   const currentImage = PRODUCT_IMAGES[selectedColor];
   const colorLabel = COLOR_OPTIONS.find((c) => c.id === selectedColor)?.label ?? "Azul";
+  const checkoutUrl = COLOR_OPTIONS.find((c) => c.id === selectedColor)?.checkoutUrl ?? "https://pay.unicopag.com.br/u3ihbm2ro7";
 
   return (
     <div className="min-h-screen bg-background text-foreground font-sans">
@@ -333,9 +335,9 @@ export function App() {
           {/* Price + CTA */}
           <div className="flex flex-col items-center gap-4">
             <div className="text-center">
-              <p className="text-muted-foreground text-sm line-through">De R$ 179,90</p>
+              <p className="text-muted-foreground text-sm line-through">De R$ 199,90</p>
               <p className="text-4xl font-extrabold text-foreground">
-                por apenas R$ <span className="text-primary nc-text-glow">97,90</span>
+                por apenas R$ <span className="text-primary nc-text-glow">112,90</span>
               </p>
             </div>
 
@@ -565,11 +567,11 @@ export function App() {
               <div className="nc-card rounded-xl p-4 flex flex-col gap-1.5">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Preço original</span>
-                  <span className="text-muted-foreground line-through">R$ 179,90</span>
+                  <span className="text-muted-foreground line-through">R$ 199,90</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Desconto especial</span>
-                  <span className="text-primary font-medium">–R$ 82,00</span>
+                  <span className="text-primary font-medium">–R$ 87,00</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Frete</span>
@@ -579,8 +581,12 @@ export function App() {
                 <div className="flex justify-between items-end">
                   <span className="font-semibold text-foreground">Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-extrabold text-foreground">R$ 97,90</p>
+                    <p className="text-2xl font-extrabold text-foreground">R$ 112,90</p>
                   </div>
+                </div>
+                <div className="flex justify-between text-xs mt-1 pt-1 border-t border-border">
+                  <span className="text-muted-foreground">5% desconto no Pix</span>
+                  <span className="text-primary font-semibold">R$ 107,25</span>
                 </div>
               </div>
 
@@ -602,15 +608,17 @@ export function App() {
               </div>
 
               {/* CTA button */}
-              <button
-                className="nc-glow-btn w-full bg-primary text-primary-foreground font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2"
-                onClick={() => alert("Integrar link de compra aqui")}
+              <a
+                href={checkoutUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nc-glow-btn w-full bg-primary text-primary-foreground font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 text-center"
               >
-                Comprar agora — R$ 97,90
+                Comprar agora — R$ 112,90
                 <ArrowRight size={18} />
-              </button>
+              </a>
               <p className="text-center text-xs text-muted-foreground">
-                Compra 100% segura · Parcelamento disponível
+                Compra 100% segura · 5% de desconto no Pix
               </p>
             </div>
           </div>
@@ -670,6 +678,18 @@ export function App() {
 
       <div className="nc-divider" />
 
+      {/* ───── WHATSAPP FLOATING BUTTON ───── */}
+      <a
+        href="https://wa.me/5511949058502?text=Ol%C3%A1!%20Preciso%20de%20ajuda%20com%20meu%20pedido%20do%20NeuroControl,%20pode%20me%20ajudar%3F"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Falar no WhatsApp"
+        className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform hover:scale-110"
+        style={{ background: "#25D366" }}
+      >
+        <MessageCircle size={28} className="text-white fill-white" />
+      </a>
+
       {/* ───── FOOTER ───── */}
       <footer
         className="px-4 py-8 text-center"
@@ -677,6 +697,9 @@ export function App() {
       >
         <p className="text-xs text-muted-foreground mb-1">
           © 2026 NeuroControl · Todos os direitos reservados
+        </p>
+        <p className="text-xs text-muted-foreground mb-2">
+          Atendimento: <a href="mailto:atendimento@neurocontrol.com.br" className="text-primary hover:underline">atendimento@neurocontrol.com.br</a>
         </p>
         <p className="text-[11px] text-muted-foreground/60">
           Este produto não é um dispositivo médico e não se destina a diagnosticar, tratar ou prevenir doenças.
