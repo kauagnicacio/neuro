@@ -73,6 +73,26 @@ const REVIEWS = [
     image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/73e91796-1ccc-416d-b8c1-9f45ecbcd7cb.png",
     text: "Surpreendeu muito! Qualidade excelente e entrega rápida.",
   },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/ac97cdc6-4a8c-4643-bf2c-5e57939259c9.png",
+    text: "Chegou antes do prazo e funcionou na primeira tentativa. Adorei!",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/5d283dc6-517d-450b-9246-3642ff38be1c.png",
+    text: "Produto incrível, já recomendei para toda a família.",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/a307f6ac-12cd-4d27-b27b-735d0907f870.png",
+    text: "Faz exatamente o que promete. Sensação de relaxamento real.",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/5fb11e78-6f7d-4dcb-9f96-d4604d8fe6f0.png",
+    text: "Compra perfeita! Embalagem caprichada e produto de altíssima qualidade.",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/f362e645-d384-4cfc-8977-0f692ee46f48.png",
+    text: "Uso toda manhã e a diferença no meu dia é enorme. Vale muito!",
+  },
 ];
 
 const FAQS = [
