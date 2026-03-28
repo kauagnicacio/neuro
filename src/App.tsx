@@ -53,18 +53,26 @@ const HOW_IT_WORKS = [
 ];
 
 const REVIEWS = [
-  { name: "Mariana S.", stars: 5, text: "Comprei com desconfiança mas me surpreendi. Uso toda noite antes de dormir e a diferença é real. Sono muito melhor!", location: "São Paulo, SP" },
-  { name: "Carlos R.", stars: 5, text: "Trabalho com muita tensão e o NeuroControl virou parte da minha rotina. Fácil de usar e o resultado aparece rápido.", location: "Belo Horizonte, MG" },
-  { name: "Ana Paula M.", stars: 5, text: "Design bonito, discreto e funcional. Já indiquei para 3 amigas. Qualidade que se vê na embalagem e no produto.", location: "Curitiba, PR" },
-  { name: "Roberto L.", stars: 5, text: "Chegou rápido, embalagem impecável. Produto de qualidade que realmente entrega o que promete. Recomendo.", location: "Rio de Janeiro, RJ" },
-  { name: "Fernanda K.", stars: 5, text: "Tenho muito estresse no dia a dia e esse dispositivo faz diferença. Uso na pausa do almoço e chego revigorada no segundo turno.", location: "Porto Alegre, RS" },
-  { name: "Lucas T.", stars: 5, text: "Presente para minha mãe. Ela adorou, usa todo dia. Vale cada centavo, entrega muito mais do que eu esperava.", location: "Brasília, DF" },
-  { name: "Patrícia V.", stars: 5, text: "Nunca imaginei que algo tão pequeno pudesse fazer tanta diferença. Minhas dores de cabeça de tensão diminuíram muito.", location: "Fortaleza, CE" },
-  { name: "Diego M.", stars: 5, text: "Produto sensacional. Uso depois da academia para relaxar a musculatura. Recuperação muito mais rápida!", location: "Salvador, BA" },
-  { name: "Juliana C.", stars: 5, text: "Atendimento excelente e entrega super rápida. O produto é ainda melhor do que aparece nas fotos. Amei!", location: "Recife, PE" },
-  { name: "Ricardo F.", stars: 5, text: "Estava cético mas minha esposa me convenceu. Agora somos dois usando todo dia. Virou indispensável aqui em casa.", location: "Manaus, AM" },
-  { name: "Beatriz O.", stars: 5, text: "Perfeito para usar no trabalho nas horas mais tensas. Pequeno, discreto e muito eficiente. Super recomendo!", location: "Campinas, SP" },
-  { name: "André N.", stars: 5, text: "Melhor compra do ano. Resultado imediato logo na primeira sessão. Qualidade excepcional pelo preço.", location: "Florianópolis, SC" },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/8adf34f5-0bb6-440a-8958-7694aefbbebe.png",
+    text: "Recebi hoje e já estou amando! A qualidade é incrível.",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/e988b2fd-a8d8-4c48-b106-901f9263e7ca.png",
+    text: "Produto chegou super rápido e bem embalado. Recomendo!",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/de29435a-51e9-474b-b23b-5d5b4c0c1191.png",
+    text: "Valeu cada centavo. Já sinto a diferença no relaxamento!",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/34124e32-693d-4e6e-ba0c-9ff67e3c50fa.png",
+    text: "Melhor compra que fiz esse ano. Uso todo dia antes de dormir.",
+  },
+  {
+    image: "https://pub-c0bfb119504542e0b2e6ebc8f6b3b1df.r2.dev/user-uploads/user_34dEQaUEdA0vDQOPaz2weSm3AKh/73e91796-1ccc-416d-b8c1-9f45ecbcd7cb.png",
+    text: "Surpreendeu muito! Qualidade excelente e entrega rápida.",
+  },
 ];
 
 const FAQS = [
@@ -79,88 +87,67 @@ const FAQS = [
 
 function ReviewCarousel() {
   const [current, setCurrent] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const visibleCount = 2;
   const total = REVIEWS.length;
-  const maxIndex = total - visibleCount;
 
   const goTo = (idx: number) => {
-    if (isAnimating) return;
-    setIsAnimating(true);
-    setCurrent(Math.max(0, Math.min(idx, maxIndex)));
-    setTimeout(() => setIsAnimating(false), 350);
+    setCurrent((idx + total) % total);
   };
-
-  useEffect(() => {
-    timerRef.current = setInterval(() => {
-      setCurrent((prev) => {
-        const next = prev + 1;
-        return next > maxIndex ? 0 : next;
-      });
-    }, 4000);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [maxIndex]);
 
   const resetTimer = () => {
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
-      setCurrent((prev) => {
-        const next = prev + 1;
-        return next > maxIndex ? 0 : next;
-      });
-    }, 4000);
+      setCurrent((prev) => (prev + 1) % total);
+    }, 4500);
   };
 
-  const handlePrev = () => {
-    goTo(current === 0 ? maxIndex : current - 1);
+  useEffect(() => {
     resetTimer();
-  };
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
 
-  const handleNext = () => {
-    goTo(current >= maxIndex ? 0 : current + 1);
-    resetTimer();
-  };
+  const handlePrev = () => { goTo(current - 1); resetTimer(); };
+  const handleNext = () => { goTo(current + 1); resetTimer(); };
 
-  const visibleReviews = REVIEWS.slice(current, current + visibleCount);
+  const review = REVIEWS[current];
 
   return (
-    <div className="relative">
-      {/* Cards */}
+    <div className="relative flex flex-col items-center gap-6">
+      {/* Card principal */}
       <div
-        className="grid grid-cols-1 md:grid-cols-2 gap-4 transition-opacity duration-300"
-        style={{ opacity: isAnimating ? 0.6 : 1 }}
+        key={current}
+        className="nc-card rounded-2xl overflow-hidden w-full max-w-lg mx-auto"
+        style={{ animation: "fadeInUp 0.35s ease" }}
       >
-        {visibleReviews.map((r, i) => (
-          <div key={`${current}-${i}`} className="nc-card rounded-2xl p-5 flex flex-col gap-3">
-            <StarRating count={r.stars} />
-            <p className="text-sm text-foreground leading-relaxed">"{r.text}"</p>
-            <div className="flex items-center gap-2 mt-auto">
-              <div
-                className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-                style={{ background: "oklch(0.62 0.20 225 / 0.2)", color: "oklch(0.62 0.20 225)" }}
-              >
-                {r.name[0]}
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-foreground">{r.name}</p>
-                <p className="text-xs text-muted-foreground">{r.location}</p>
-              </div>
-              <div className="ml-auto">
-                <span className="text-[10px] text-primary font-medium bg-primary/10 px-2 py-0.5 rounded-full">
-                  Compra verificada
-                </span>
-              </div>
-            </div>
+        {/* Imagem do print */}
+        <div className="w-full bg-muted flex items-center justify-center overflow-hidden" style={{ maxHeight: "420px" }}>
+          <img
+            src={review.image}
+            alt="Avaliação real de cliente"
+            className="w-full object-contain"
+            style={{ maxHeight: "420px" }}
+          />
+        </div>
+
+        {/* Depoimento */}
+        <div className="p-5 flex flex-col gap-3">
+          <StarRating count={5} />
+          <p className="text-sm text-foreground leading-relaxed font-medium">"{review.text}"</p>
+          <div className="flex items-center justify-between">
+            <span
+              className="text-[11px] font-semibold px-3 py-1 rounded-full"
+              style={{ background: "oklch(0.62 0.20 225 / 0.15)", color: "oklch(0.62 0.20 225)" }}
+            >
+              ✓ Compra verificada
+            </span>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Controls */}
-      <div className="flex items-center justify-center gap-4 mt-6">
+      <div className="flex items-center gap-4">
         <button
           onClick={handlePrev}
           className="w-9 h-9 rounded-full flex items-center justify-center transition-all hover:scale-110"
@@ -170,9 +157,8 @@ function ReviewCarousel() {
           <ChevronLeft size={18} />
         </button>
 
-        {/* Dots */}
         <div className="flex gap-1.5">
-          {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+          {REVIEWS.map((_, i) => (
             <button
               key={i}
               onClick={() => { goTo(i); resetTimer(); }}
@@ -196,6 +182,13 @@ function ReviewCarousel() {
           <ChevronRight size={18} />
         </button>
       </div>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </div>
   );
 }
