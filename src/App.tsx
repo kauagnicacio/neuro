@@ -32,9 +32,9 @@ const PRODUCT_IMAGES: Record<string, string> = {
 };
 
 const COLOR_OPTIONS = [
-  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6", checkoutUrl: "https://pay.unicopag.com.br/u3ihbm2ro7" },
-  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8", checkoutUrl: "https://pay.unicopag.com.br/v8kiekruga" },
-  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569", checkoutUrl: "https://pay.unicopag.com.br/umrfrokshj" },
+  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCXCR" },
+  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCX9Q" },
+  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCXCQ" },
 ];
 
 const BENEFITS = [
