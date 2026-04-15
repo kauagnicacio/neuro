@@ -32,9 +32,9 @@ const PRODUCT_IMAGES: Record<string, string> = {
 };
 
 const COLOR_OPTIONS = [
-  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCXCR" },
-  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCX9Q" },
-  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569", checkoutUrl: "https://checkout.neurocontroll.com.br/VCCL1O8SCXCQ" },
+  { id: "azul", label: "Azul", bg: "#1a6eff", ring: "#3b82f6", checkoutUrl: "https://pay.neurocontroll.com.br/checkout/cmnzd2ug000jd1kmykq2e07ij?offer=UN5G38S" },
+  { id: "branco", label: "Branco", bg: "#e8edf5", ring: "#94a3b8", checkoutUrl: "https://pay.neurocontroll.com.br/checkout/cmnzaes1t07uu1ym991xb3x92?offer=TKP82CY" },
+  { id: "preto", label: "Preto", bg: "#1a1a2e", ring: "#475569", checkoutUrl: "https://checkoutseguro.ru/checkout/cmnzctij700fn1kmyt7ve5byd?offer=mj06qip" },
 ];
 
 const BENEFITS = [
