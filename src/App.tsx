@@ -348,9 +348,9 @@ export function App() {
           {/* Price + CTA */}
           <div className="flex flex-col items-center gap-4">
             <div className="text-center">
-              <p className="text-muted-foreground text-sm line-through">De R$ 119,90</p>
+              <p className="text-muted-foreground text-sm line-through">De R$ 169,90</p>
               <p className="text-4xl font-extrabold text-foreground">
-                por apenas R$ <span className="text-primary nc-text-glow">67,90</span>
+                por apenas R$ <span className="text-primary nc-text-glow">97,90</span>
               </p>
             </div>
 
@@ -580,11 +580,11 @@ export function App() {
               <div className="nc-card rounded-xl p-4 flex flex-col gap-1.5">
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Preço original</span>
-                  <span className="text-muted-foreground line-through">R$ 119,90</span>
+                  <span className="text-muted-foreground line-through">R$ 169,90</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Desconto especial</span>
-                  <span className="text-primary font-medium">–R$ 52,00</span>
+                  <span className="text-primary font-medium">–R$ 72,00</span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-muted-foreground">Frete</span>
@@ -594,12 +594,12 @@ export function App() {
                 <div className="flex justify-between items-end">
                   <span className="font-semibold text-foreground">Total</span>
                   <div className="text-right">
-                    <p className="text-2xl font-extrabold text-foreground">R$ 67,90</p>
+                    <p className="text-2xl font-extrabold text-foreground">R$ 97,90</p>
                   </div>
                 </div>
                 <div className="flex justify-between text-xs mt-1 pt-1 border-t border-border">
                   <span className="text-muted-foreground">5% desconto no Pix</span>
-                  <span className="text-primary font-semibold">R$ 64,50</span>
+                  <span className="text-primary font-semibold">R$ 93,01</span>
                 </div>
               </div>
 
@@ -627,7 +627,7 @@ export function App() {
                 rel="noopener noreferrer"
                 className="nc-glow-btn w-full bg-primary text-primary-foreground font-bold text-base py-4 rounded-2xl flex items-center justify-center gap-2 text-center"
               >
-                Comprar agora — R$ 67,90
+                Comprar agora — R$ 97,90
                 <ArrowRight size={18} />
               </a>
               <p className="text-center text-xs text-muted-foreground">
